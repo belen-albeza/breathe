@@ -1,0 +1,27 @@
+{
+  "name": "breathe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/belen-albeza/breathe.git"
+  },
+  "author": "Belén 'BenKo' Albeza <belen.albeza@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/belen-albeza/breathe/issues"
+  },
+  "homepage": "https://github.com/belen-albeza/breathe",
+  "dependencies": {
+    "gulp": "^3.8.10",
+    "gulp-browserify": "^0.5.1",
+    "gulp-connect": "^2.2.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-less": "^2.0.1",
+    "gulp-livereload": "^3.7.0"
+  }
+}
