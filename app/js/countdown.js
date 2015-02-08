@@ -2,18 +2,26 @@
 
 var Timer = require('./timer.js');
 
-function Countdown(el) {
+function Countdown(el, audio) {
   this.el = el;
+  this.audio = audio;
   this.timer = new Timer();
 
-  this.timer.emitter.on('tick', this._refreshTime.bind(this));
+  this.timer.emitter.on('tick', function (data) {
+    this.refreshTime(data.remaining);
+  }.bind(this));
 
   this.timer.emitter.on('start', function (data) {
-    this._refreshTime({ remaining: data.amount });
+    this.refreshTime(data.amount);
   }.bind(this));
 
   this.timer.emitter.on('end', function () {
-    this._refreshTime({ remaining: 0 });
+    this.refreshTime(0);
+    // chrome hack - reload audio to be played more than one
+    if (/Chrome/.test(navigator.userAgent)) {
+      this.audio.load();
+    }
+    this.audio.play();
   }.bind(this));
 }
 
@@ -27,8 +35,8 @@ Countdown.prototype.start = function (amount) {
   this.timer.start(amount);
 };
 
-Countdown.prototype._refreshTime = function (data) {
-  var remaining = Math.round(data.remaining / 1000);
+Countdown.prototype.refreshTime = function (remaining) {
+  var remaining = Math.round(remaining / 1000);
   var minutes = Math.floor(remaining / 60);
   var seconds = remaining % 60;
 

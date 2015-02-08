@@ -1,13 +1,14 @@
 var minimist = require('minimist');
+
 var browserify = require('browserify');
 var watchify = require('watchify');
+var source = require('vinyl-source-stream');
 
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var connect = require('gulp-connect');
 var livereload = require('gulp-livereload');
 var less = require('gulp-less');
-var gutil = require('gulp-util');
-var source = require('vinyl-source-stream');
 
 // command line args
 var knownOptions =  {
@@ -18,8 +19,6 @@ var options = minimist(process.argv.slice(2), knownOptions);
 
 // setup browserify
 var bundler = browserify('./app/js/main.js');
-// add browserify transforms here
-// bundler.transform('brfs');
 
 function bundle() {
   return bundler.bundle()

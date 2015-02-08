@@ -2,12 +2,16 @@
 
 var Countdown = require('./countdown.js');
 
-var timerEl = document.getElementById('timer');
-var form = document.querySelector('.config');
+var countdown = new Countdown(
+  document.getElementById('timer'),
+  document.getElementById('sfx-end')
+);
 
-var countdown = new Countdown(timerEl);
+var form = document.querySelector('.config');
 
 form.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  countdown.start(4000);
+  var minutes = evt.target.elements.time.value;
+
+  countdown.start(minutes * 60 * 1000);
 }, false);

@@ -12,7 +12,7 @@
       <h1 class="title">Breathe</h1>
       <form class="config">
         <p>
-        <select>
+        <select name="time">
           <option value="2">2 mins</option>
           <option value="5">5 mins</option>
           <option value="10">10 mins</option>
@@ -28,6 +28,7 @@
         </p>
       </form>
       <p class="timer hidden"><time id="timer">00:00</time></p>
+      <audio id="sfx-end" src="audio/gong.ogg" preload></audio>
     </main>
     <footer class="main-footer">
       <p>Crafted with love by <a href="https://github.com/belen-albeza">@ladybenko</a>.</p>
