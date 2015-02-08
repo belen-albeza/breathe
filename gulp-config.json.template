@@ -1,0 +1,7 @@
+{
+  "deploy": {
+    "host": "empire.gov",
+    "user": "darthvader",
+    "path": "/path/to/site"
+  }
+}

@@ -23,9 +23,9 @@
     "gulp-jshint": "^1.9.2",
     "gulp-less": "^2.0.1",
     "gulp-livereload": "^3.7.0",
+    "gulp-rsync": "0.0.5",
     "gulp-util": "^3.0.3",
     "gutil": "^1.6.0",
-    "minimist": "^1.1.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.3.0"
   }
