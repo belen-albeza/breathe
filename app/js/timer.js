@@ -1,35 +1,56 @@
 'use strict';
 
-function Timer(el) {
+var EventEmitter = require('events').EventEmitter;
+
+var emitter = new EventEmitter();
+
+function Timer() {
   this._interval = null;
   this._timeout = null;
-  this.element = el;
+
+  this.emitter = new EventEmitter();
 
   this.startTime = null;
   this.amount = null;
 }
 
 Timer.prototype.start = function (amount) {
-  this._timeout = setTimeout(this._timerDone.bind(this), amount);
-  this._interval = setInterval(this._updateUI.bind(this), 1000);
+  this._clearTimeouts();
+
   this.startTime = new Date();
   this.amount = amount;
-  console.log('START');
+
+  this._interval = setInterval(this._tick.bind(this), 1000);
+  this._timeout = setTimeout(this._timerDone.bind(this), amount);
+
+  this.emitter.emit('start', {
+    startTime: this.startTime,
+    amount: amount
+  });
 };
 
-Timer.prototype._updateUI = function () {
+Timer.prototype._clearTimeouts = function () {
+  if (this._timeout) { clearTimeout(this._timeout); }
+  if (this._interval) { clearInterval(this._interval); }
+
+  this._timeout = this._interval = null;
+};
+
+Timer.prototype._tick = function () {
   var now = new Date();
   var diff =  now - this.startTime;
-  console.log('DIFF', diff / 1000);
+
+  this.emitter.emit('tick', {
+    startTime: this.startTime,
+    elapsed: diff,
+    remaining: this.amount - diff,
+    amount: this.amount
+  });
 };
 
 Timer.prototype._timerDone = function () {
-  console.log('DONE');
-
-  if (this._interval) { clearInterval(this._interval); }
-  if (this._timeout) { clearInterval(this._timeout); }
-
-  this._interval = this._timeout = null;
+  this._clearTimeouts();
+  this.emitter.emit('end', { amount: this.amount });
 };
 
 module.exports = Timer;
