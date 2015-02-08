@@ -18,7 +18,7 @@ body {
 }
 
 h1, h2, h3, p, li {
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 a {
@@ -45,6 +45,14 @@ main {
   margin-top: 3rem;
   flex: 1;
   border-top: 1px solid #eee;
+  padding-top: 1rem;
+  p {
+    margin: 0.5rem 0;
+    &.source {
+      font-size: 8pt;
+    }
+  }
+
 }
 
 .title {
@@ -60,16 +68,20 @@ main {
 .config {
   font-size: 0;
   @border-radius: 4px;
+  max-width: 20rem;
+  margin: 0 auto;
 
   select, button {
     .appearance(none);
     font-family: @body-font;
     border-radius: 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     background: #f8f8f8;
-    padding: 1rem 2rem;
+    padding: 1rem 1.75rem;
     border: 0;
     color: #999;
+    width: 40%;
+    box-sizing: border-box;
   }
 
   select {
@@ -94,4 +106,5 @@ main {
   color: #000;
   font-family: @fancy-font;
   font-size: 54pt;
+  margin-top: 2rem;
 }
